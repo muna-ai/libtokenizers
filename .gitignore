@@ -1,0 +1,14 @@
+# Build
+build/
+
+# Environment
+.env*
+!.env.example
+
+# IDE
+.idea
+.vscode
+.vs
+
+# Misc
+.DS_Store

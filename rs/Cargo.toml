@@ -1,0 +1,26 @@
+[package]
+name = "tokenizers-c"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+libc = "0.2"
+serde = { version = "1.0", features = [ "derive" ] }
+serde_json = "1.0"
+tokenizers = { version = "0.20.1", default-features = false, features = ["onig"] }
+
+# In Debug mode, there might be too many locals that don't get stripped
+# This causes either an exception in `wasm-emscripten-finalize`
+# Or a segmentation fault in `wasm-ld`
+# Fix is to compile with optimizations, but preserve debug info
+[profile.dev]
+opt-level = 2
+debug = 2
+debug-assertions = true
+overflow-checks = true
+
+[profile.release]
+lto = true
