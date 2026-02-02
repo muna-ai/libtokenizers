@@ -1,3 +1,6 @@
+## 0.0.3
+*INCOMPLETE*
+
 ## 0.0.2
 + Fixed compile error due to naming in `tokenizer::from_file` method.
 
