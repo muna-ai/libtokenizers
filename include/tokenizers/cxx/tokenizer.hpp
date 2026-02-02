@@ -137,11 +137,11 @@ namespace huggingface::tokenizers {
         static tokenizer from_file(const std::filesystem::path& path) {
             if (!std::filesystem::exists(path))
                 throw std::runtime_error("Failed to create tokenizer because tokenizer file could not be found");
-            hft_tokenizer* tokenizer = nullptr;
-            hft_status status = hft_tokenizer_create_from_file(path.string().c_str(), &tokenizer);
+            hft_tokenizer* tok = nullptr;
+            hft_status status = hft_tokenizer_create_from_file(path.string().c_str(), &tok);
             if (status != HFT_OK)
                 throw std::runtime_error("Failed to create tokenizer from file");
-            return tokenizer(tokenizer);
+            return tokenizer(tok);
         }
 
     private:
