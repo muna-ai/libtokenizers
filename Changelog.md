@@ -1,3 +1,6 @@
+## 0.0.5
+*INCOMPLETE*
+
 ## 0.0.4
 + Fixed compile error due to CMake incorrectly escaping arguments.
 
