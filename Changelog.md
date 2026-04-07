@@ -1,5 +1,5 @@
 ## 0.0.3
-*INCOMPLETE*
++ Added support for threading in WebAssembly.
 
 ## 0.0.2
 + Fixed compile error due to naming in `tokenizer::from_file` method.

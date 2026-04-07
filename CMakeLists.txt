@@ -54,15 +54,17 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         AR_${LIBTOKENIZERS_CARGO_TARGET}=${CMAKE_AR}
         CC_${LIBTOKENIZERS_CARGO_TARGET}=${CMAKE_C_COMPILER}
         CXX_${LIBTOKENIZERS_CARGO_TARGET}=${CMAKE_CXX_COMPILER}
-        # For Rust packages that compile C libraries with `cc-rs`, we need to force-enable PIC
-        CFLAGS_${LIBTOKENIZERS_CARGO_TARGET}="-fPIC"
-        CXXFLAGS_${LIBTOKENIZERS_CARGO_TARGET}="-fPIC"
+        # For Rust packages that compile C libraries with `cc-rs`, we need to force-enable PIC.
+        # Enable atomics and bulk-memory for SharedArrayBuffer/pthreads compatibility.
+        CFLAGS_${LIBTOKENIZERS_CARGO_TARGET}="-fPIC -matomics -mbulk-memory"
+        CXXFLAGS_${LIBTOKENIZERS_CARGO_TARGET}="-fPIC -matomics -mbulk-memory"
         # A few critical items:
         # 1. Enable PIC
         # 2. Default visibility to hidden
         # 3. Enable WASM EH (`-Zemscripten-wasm-eh`) which also disables Emscripten (JS) exceptions (`call -> invoke_*` calls).
         # 4. Enable legacy WASM EH for coverage of older browsers
-        "RUSTFLAGS=-C relocation-model=pic -Zdefault-visibility=hidden -Zemscripten-wasm-eh -C llvm-args=-wasm-use-legacy-eh"
+        # 5. Enable atomics and bulk-memory for SharedArrayBuffer/pthreads compatibility
+        "RUSTFLAGS=-C relocation-model=pic -Zdefault-visibility=hidden -Zemscripten-wasm-eh -C llvm-args=-wasm-use-legacy-eh -C target-feature=+atomics,+bulk-memory"
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "iOS") # CHECK # We don't support iphonesimulator
     set(LIBTOKENIZERS_CARGO_TARGET aarch64-apple-ios)
