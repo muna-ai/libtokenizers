@@ -1,3 +1,6 @@
+## 0.0.4
++ Fixed compile error due to CMake incorrectly escaping arguments.
+
 ## 0.0.3
 + Added support for threading in WebAssembly.
 
