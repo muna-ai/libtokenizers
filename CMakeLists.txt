@@ -56,8 +56,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         CXX_${LIBTOKENIZERS_CARGO_TARGET}=${CMAKE_CXX_COMPILER}
         # For Rust packages that compile C libraries with `cc-rs`, we need to force-enable PIC.
         # Enable atomics and bulk-memory for SharedArrayBuffer/pthreads compatibility.
-        CFLAGS_${LIBTOKENIZERS_CARGO_TARGET}="-fPIC -matomics -mbulk-memory"
-        CXXFLAGS_${LIBTOKENIZERS_CARGO_TARGET}="-fPIC -matomics -mbulk-memory"
+        "CFLAGS_${LIBTOKENIZERS_CARGO_TARGET}=-fPIC -matomics -mbulk-memory"
+        "CXXFLAGS_${LIBTOKENIZERS_CARGO_TARGET}=-fPIC -matomics -mbulk-memory"
         # A few critical items:
         # 1. Enable PIC
         # 2. Default visibility to hidden
